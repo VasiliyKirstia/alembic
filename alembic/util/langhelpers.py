@@ -1,5 +1,6 @@
 import collections
 from collections.abc import Iterable
+import datetime
 import textwrap
 from typing import Any
 from typing import Callable
@@ -188,7 +189,10 @@ def _with_legacy_names(translations):
 
 
 def rev_id() -> str:
-    return uuid.uuid4().hex[-12:]
+    return '{}.{}'.format(
+        datetime.datetime.utcnow().strftime('%Y%m%d'),
+        uuid.uuid4().hex[-12:],
+    )
 
 
 @overload
